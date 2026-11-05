@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的互动小网站</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: "Microsoft Yahei", sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f5f7fa;
+            color: #222;
+            transition: 0.3s all;
+        }
+        .dark {
+            background-color: #1a1a2e;
+            color: #eee;
+        }
+        .box {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.7);
+        }
+        .dark .box {
+            background: rgba(255,255,255,0.1);
+        }
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            background: #4285f4;
+            color: white;
+            cursor: pointer;
+            margin: 4px;
+        }
+        button:hover {
+            background: #2b6ed9;
+        }
+        input {
+            padding: 8px;
+            width: 70%;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>✨ 互动小站</h1>
+
+    <div class="box">
+        <h3>切换深色/浅色模式</h3>
+        <button onclick="toggleDark()">切换主题</button>
+    </div>
+
+    <div class="box">
+        <h3>点击变文字</h3>
+        <button onclick="changeWord()">点我</button>
+        <p id="text1">等待点击...</p>
+    </div>
+
+    <div class="box">
+        <h3>计数器：<span id="num">0</span></h3>
+        <button onclick="add()">+1</button>
+        <button onclick="minus()">-1</button>
+        <button onclick="reset()">清零</button>
+    </div>
+
+    <div class="box">
+        <h3>输入文字展示</h3>
+        <input type="text" id="userInput" placeholder="在这里打字">
+        <button onclick="showText()">确认</button>
+        <p>你输入的：<span id="show"></span></p>
+    </div>
+
+    <div class="box">
+        <h3>切换图片</h3>
+        <button onclick="switchImg()">换图</button>
+        <br>
+        <img id="pic" src="https://picsum.photos/id/237/500/250">
+    </div>
+
+    <script>
+        // 深色模式
+        function toggleDark(){
+            document.body.classList.toggle("dark");
+        }
+
+        // 文字切换
+        let flag = false;
+        function changeWord(){
+            const p = document.getElementById("text1");
+            if(!flag){
+                p.innerText = "太棒啦，你点到我了！";
+                flag = true;
+            }else{
+                p.innerText = "等待点击...";
+                flag = false;
+            }
+        }
+
+        // 计数器
+        let count = 0;
+        function add(){
+            count++;
+            document.getElementById("num").innerText = count;
+        }
+        function minus(){
+            count--;
+            document.getElementById("num").innerText = count;
+        }
+        function reset(){
+            count = 0;
+            document.getElementById("num").innerText = count;
+        }
+
+        // 输入文字
+        function showText(){
+            let val = document.getElementById("userInput").value;
+            document.getElementById("show").innerText = val;
+        }
+
+        // 切换图片
+        let imgId = 237;
+        function switchImg(){
+            imgId += 1;
+            document.getElementById("pic").src = "https://picsum.photos/id/"+imgId+"/500/250";
+        }
+    </script>
+</body>
+</html>
